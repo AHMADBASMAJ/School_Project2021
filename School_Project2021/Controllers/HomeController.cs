@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using School_Project2021.Models;
 using System;
@@ -15,7 +16,7 @@ namespace School_Project2021.Controllers
 
         VideoContext db;
 
-        public static string currentLayout;
+        public static string currentLayout= "_adminLayout";
         public HomeController(ILogger<HomeController> logger, VideoContext context)
         {
             _logger = logger;
@@ -56,7 +57,11 @@ namespace School_Project2021.Controllers
             return View(videos);
         }
 
-
+        [Authorize(Roles = "Admin")]
+        public IActionResult Admin()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@if (IsSectionDefined("Scripts"))
+{
+    IgnoreSection("Scripts");
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -66,61 +71,6 @@
                     </a>
                 </li><!-- End Search Icon-->
 
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="~/Admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
 
             </ul>
         </nav><!-- End Icons Navigation -->
@@ -130,9 +80,9 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-
+            <a data-bs-target="#components-nav" data-bs-toggle="collapse"></a>
             <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " asp-controller="Admin" asp-action="Index">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -140,31 +90,31 @@
             <!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Corses</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed"  asp-controller="Courses" asp-action="Index">
+                    <i class="bi bi-menu-button-wide"></i><span>Corses</span>
                 </a>
             </li>
             <!-- End Components Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Videos</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" asp-controller="videos" asp-action="Index">
+                    <i class="bi bi-journal-text"></i><span>Videos</span>
                 </a>
             </li><!-- End Forms Nav -->
 
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
+                <a class="nav-link collapsed" href="">
                     <i class="bi bi-person"></i>
                     <span>Admins</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-login.html">
+                <a class="nav-link collapsed" asp-controller="home" asp-action="Index">
                     <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Logout</span>
+                    <span>Back To Website</span>
                 </a>
             </li><!-- End Login Page Nav -->
 
