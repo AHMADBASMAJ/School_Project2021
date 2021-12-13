@@ -41,7 +41,6 @@ namespace School_Project2021
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI().AddEntityFrameworkStores<ApplicationDbContext>();
-            //jkashdb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
