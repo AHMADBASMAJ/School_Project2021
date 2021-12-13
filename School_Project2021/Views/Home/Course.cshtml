@@ -1,0 +1,33 @@
+﻿@model List<Video>
+
+<section id="about">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <header class="section-header">
+            <h3>@ViewBag.courseName</h3>
+            <p>@ViewBag.courseDiscraption</p>
+        </header>
+        @foreach (var item in Model)
+        {
+
+            <div class="about-col">
+                <div class="row about-cols" style=" --bs-gutter-x: 1.5rem; margin-bottom:1.5rem">
+
+
+                    <div class="col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+
+                        <h2 class="title">@item.Title</h2>
+                        <p>@item.Discraption</p>
+                    </div>
+                    <div class="col-md-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+
+
+                        <iframe width="100%" height="400"
+                                src="https://www.youtube.com/embed/NxSU6fcQmPs">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
