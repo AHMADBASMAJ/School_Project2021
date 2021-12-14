@@ -22,6 +22,8 @@ namespace School_Project2021.Controllers
         // GET: Videos
         public async Task<IActionResult> Index(int id)
         {
+            if (id == 0) return RedirectToAction(nameof(AllVideos));
+
             currentId = id;
             var videoContext = _context.Videos.Where(x => x.CourseID==id);
             return View(await videoContext.ToListAsync());
@@ -29,6 +31,8 @@ namespace School_Project2021.Controllers
         // GET: All Videos
         public async Task<IActionResult> AllVideos()
         {
+            currentId = 0;
+
             var videoContext = _context.Videos.Include(v => v.Course);
             return View("Index",await videoContext.ToListAsync());
         }
