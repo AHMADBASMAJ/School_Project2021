@@ -25,10 +25,17 @@ namespace School_Project2021.Controllers
          
             return View();
         }
-        public IActionResult Contact()
+        public IActionResult ShowMessages()
         {
-
-            return View();
+            var result = db.Contacts.ToList();
+            return View(result);
+        }
+        public IActionResult Delete_Contact(int id)
+        {
+            ContactUs contact = db.Contacts.Find(id);
+            var result = db.Contacts.Remove(contact);
+            db.SaveChanges();
+            return RedirectToAction(nameof(ShowMessages));
         }
     }
 }

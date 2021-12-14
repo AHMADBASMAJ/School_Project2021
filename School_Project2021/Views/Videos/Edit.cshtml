@@ -1,4 +1,5 @@
-﻿@model School_Project2021.Models.Video
+﻿@using School_Project2021.Controllers
+@model School_Project2021.Models.Video
 
 @{
     ViewData["Title"] = "Edit";
@@ -41,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@VideosController.currentId">Back to List</a>
 </div>
 
 @section Scripts {

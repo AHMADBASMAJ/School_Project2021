@@ -13,6 +13,7 @@ namespace School_Project2021.Controllers
     {
         private readonly VideoContext _context;
 
+        public static int currentId = 0;
         public VideosController(VideoContext context)
         {
             _context = context;
@@ -21,11 +22,16 @@ namespace School_Project2021.Controllers
         // GET: Videos
         public async Task<IActionResult> Index(int id)
         {
-            //var videoContext = _context.Videos.Include(v => v.Course);
+            currentId = id;
             var videoContext = _context.Videos.Where(x => x.CourseID==id);
             return View(await videoContext.ToListAsync());
         }
-
+        // GET: All Videos
+        public async Task<IActionResult> AllVideos()
+        {
+            var videoContext = _context.Videos.Include(v => v.Course);
+            return View("Index",await videoContext.ToListAsync());
+        }
         // GET: Videos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -63,7 +69,7 @@ namespace School_Project2021.Controllers
             {
                 _context.Add(video);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = currentId });
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "Id", "Id", video.CourseID);
             return View(video);
@@ -116,7 +122,7 @@ namespace School_Project2021.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = currentId });
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "Id", "Id", video.CourseID);
             return View(video);
@@ -149,7 +155,7 @@ namespace School_Project2021.Controllers
             var video = await _context.Videos.FindAsync(id);
             _context.Videos.Remove(video);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = currentId });
         }
 
         private bool VideoExists(int id)
