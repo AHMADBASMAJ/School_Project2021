@@ -25,5 +25,10 @@ namespace School_Project2021.Controllers
          
             return View();
         }
+        public IActionResult Contact()
+        {
+
+            return View();
+        }
     }
 }

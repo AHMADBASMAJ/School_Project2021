@@ -19,9 +19,10 @@ namespace School_Project2021.Controllers
         }
 
         // GET: Videos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var videoContext = _context.Videos.Include(v => v.Course);
+            //var videoContext = _context.Videos.Include(v => v.Course);
+            var videoContext = _context.Videos.Where(x => x.CourseID==id);
             return View(await videoContext.ToListAsync());
         }
 
