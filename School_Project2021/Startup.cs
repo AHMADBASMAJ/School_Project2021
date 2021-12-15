@@ -3,16 +3,22 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using School_Project2021.Controllers;
 using School_Project2021.Data;
 using School_Project2021.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace School_Project2021
 {
@@ -40,7 +46,7 @@ namespace School_Project2021
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
-                .AddDefaultUI().AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddDefaultUI().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
 
@@ -52,6 +58,23 @@ namespace School_Project2021
                 options.Password.RequiredLength = 3;
             }
 );
+            //-------------------------------------
+            ////add mltiple language
+            services.AddLocalization(opt => { opt.ResourcesPath = "Recources"; });
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultres = new[]
+                {
+                new CultureInfo("en"),
+                new CultureInfo("tr"),
+                };
+                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+                options.SupportedCultures = supportedCultres;
+                options.SupportedUICultures = supportedCultres;
+            });
+            services.AddControllersWithViews();
+            //-------------------------------------
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,16 +96,31 @@ namespace School_Project2021
 
             app.UseRouting();
 
+            //-------------------------------------
+            //add mltiple language
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //-------------------------------------
+
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //pattern: "{language=en-US}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+
+
+
+
         }
     }
 }
