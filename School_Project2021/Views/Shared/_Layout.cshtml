@@ -53,7 +53,7 @@
 
                     <nav id="navbar" class="navbar">
                         <ul>
-                            <li><a class="nav-link scrollto active" asp-controller="home" asp-action="index">Home</a></li>
+                            @*<li><a class="nav-link scrollto active" asp-controller="home" asp-action="index">Home</a></li>
                             <li><a class="nav-link scrollto" asp-controller="home" asp-action="Contact">Contact Us</a></li>
                             <li><a class="nav-link scrollto" asp-controller="home" asp-action="Team">Team</a></li>
 
@@ -61,8 +61,8 @@
                             {
                                 <li><a class="nav-link scrollto" asp-controller="Courses" asp-action="Index">Admin</a></li>
                             }
-                            <partial name="_LoginPartial" />
-                            @*<li><a class="nav-link scrollto active" asp-controller="home" asp-action="index">@Resources.Words.Home_Menu</a></li>
+                            <partial name="_LoginPartial" />*@
+                            <li><a class="nav-link scrollto active" asp-controller="home" asp-action="index">@Resources.Words.Home_Menu</a></li>
                                 <li><a class="nav-link scrollto" asp-controller="home" asp-action="Contact">@Resources.Words.Contact_Us_Menu</a></li>
                                 <li><a class="nav-link scrollto" asp-controller="home" asp-action="Team">@Resources.Words.Team_Menu</a></li>
 
@@ -70,9 +70,9 @@
                                 {
                                     <li><a class="nav-link scrollto" asp-controller="Courses" asp-action="Index">@Resources.Words.Admin_Menu</a></li>
                                 }
-                                <partial name="_LoginPartial" />*@
+                                <partial name="_LoginPartial" />
 
-                            @*<li class="dropdown">
+                            <li class="dropdown">
                                     <a class="nav-link">Language </a>
                                     <ul>
                                         <li class="dropdown-item" style="padding-left:0px;">
@@ -82,7 +82,7 @@
                                             <a class="nav-link scrollto"> @Html.ActionLink("Türkçe", ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { language = "tr-TR" }, null)</a>
                                         </li>
                                     </ul>
-                                </li>*@
+                                </li>
 
                         </ul>
                         @*<i class="bi bi-list mobile-nav-toggle"></i>*@

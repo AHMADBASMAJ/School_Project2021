@@ -112,8 +112,8 @@ namespace School_Project2021
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                //pattern: "{language=en-US}/{controller=Home}/{action=Index}/{id?}");
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{language=en-US}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 

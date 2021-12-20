@@ -57,7 +57,8 @@ namespace School_Project2021.Controllers
         public IActionResult Team(string language)
         {
              Language.UpdateLanguage(language);
-            return View();
+            var team = db.TeamMembers.ToList();
+            return View(team);
         }
         public IActionResult Course(int id,string language)
         {
@@ -73,6 +74,7 @@ namespace School_Project2021.Controllers
         public IActionResult Admin(string language)
         {
              Language.UpdateLanguage(language);
+
             return View();
         }
 

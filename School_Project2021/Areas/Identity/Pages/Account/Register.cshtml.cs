@@ -29,7 +29,7 @@ namespace School_Project2021.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,string? language)
         {
             _userManager = userManager;
             _signInManager = signInManager;
