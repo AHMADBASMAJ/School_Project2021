@@ -18,6 +18,7 @@ namespace School_Project2021.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<ContactUs> Contacts { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
     }
 }

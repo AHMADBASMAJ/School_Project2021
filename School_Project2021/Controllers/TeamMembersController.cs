@@ -9,24 +9,22 @@ using School_Project2021.Models;
 
 namespace School_Project2021.Controllers
 {
-    public class CoursesController : Controller
+    public class TeamMembersController : Controller
     {
         private readonly VideoContext _context;
 
-        public CoursesController(VideoContext context)
+        public TeamMembersController(VideoContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: TeamMembers
         public async Task<IActionResult> Index()
         {
-            HomeController.currentLayout = "_adminLayout";
-
-            return View(await _context.Courses.ToListAsync());
+            return View(await _context.TeamMembers.ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: TeamMembers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +32,39 @@ namespace School_Project2021.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            var teamMember = await _context.TeamMembers
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (teamMember == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(teamMember);
         }
 
-        // GET: Courses/Create
+        // GET: TeamMembers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: TeamMembers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Discraption,Image")] Course course)
+        public async Task<IActionResult> Create([Bind("ID,Name,JopTitle,Discraption,Image")] TeamMember teamMember)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(teamMember);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(teamMember);
         }
 
-        // GET: Courses/Edit/5
+        // GET: TeamMembers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +72,22 @@ namespace School_Project2021.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            var teamMember = await _context.TeamMembers.FindAsync(id);
+            if (teamMember == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(teamMember);
         }
 
-        // POST: Courses/Edit/5
+        // POST: TeamMembers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Discraption,Image")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,JopTitle,Discraption,Image")] TeamMember teamMember)
         {
-            if (id != course.Id)
+            if (id != teamMember.ID)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace School_Project2021.Controllers
             {
                 try
                 {
-                    _context.Update(course);
+                    _context.Update(teamMember);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.Id))
+                    if (!TeamMemberExists(teamMember.ID))
                     {
                         return NotFound();
                     }
@@ -114,10 +112,10 @@ namespace School_Project2021.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(teamMember);
         }
 
-        // GET: Courses/Delete/5
+        // GET: TeamMembers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +123,30 @@ namespace School_Project2021.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            var teamMember = await _context.TeamMembers
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (teamMember == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(teamMember);
         }
 
-        // POST: Courses/Delete/5
+        // POST: TeamMembers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(course);
+            var teamMember = await _context.TeamMembers.FindAsync(id);
+            _context.TeamMembers.Remove(teamMember);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool TeamMemberExists(int id)
         {
-            return _context.Courses.Any(e => e.Id == id);
+            return _context.TeamMembers.Any(e => e.ID == id);
         }
     }
 }

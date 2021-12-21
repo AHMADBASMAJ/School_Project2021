@@ -21,7 +21,7 @@ namespace School_Project2021.Controllers
         private readonly IStringLocalizer<HomeController> _localizer;
         VideoContext db;
 
-        public static string currentLayout= "_adminLayout";
+        public static string currentLayout = "_adminLayout";
         public HomeController(ILogger<HomeController> logger, VideoContext context, IStringLocalizer<HomeController> localizer)
         {
             _localizer = localizer;
@@ -44,9 +44,10 @@ namespace School_Project2021.Controllers
             return View();
         }
 
-        public IActionResult Contact_Post(ContactUs newMessage,string language)
+        public IActionResult Contact_Post(ContactUs newMessage, string language)
         {
-             Language.UpdateLanguage(language);
+            Language.UpdateLanguage(language);
+
             db.Contacts.Add(newMessage);
             db.SaveChanges();
 
@@ -54,29 +55,46 @@ namespace School_Project2021.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public IActionResult AddComment(string text, int currentCourseId, int currentVideoId)
+        {
+            Comment newComment=new Comment();
+            newComment.Text = text;
+            newComment.Date = DateTime.Now;
+            newComment.UserName = User.Identity.Name;
+            newComment.VideoID = currentVideoId;
+            db.Comments.Add(newComment);
+            db.SaveChanges();
+
+            return RedirectToAction(nameof(Course),new { id=currentCourseId });
+        }
+
         public IActionResult Team(string language)
         {
-             Language.UpdateLanguage(language);
+            Language.UpdateLanguage(language);
             var team = db.TeamMembers.ToList();
             return View(team);
-        }
-        public IActionResult Course(int id,string language)
-        {
-             Language.UpdateLanguage(language);
-            ViewBag.courseName = db.Courses.Find(id).Name;
-            ViewBag.courseDiscraption = db.Courses.Find(id).Discraption;
-            var videos= db.Videos.Where(x => x.CourseID == id).ToList();
-
-            return View(videos);
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Admin(string language)
         {
-             Language.UpdateLanguage(language);
+            Language.UpdateLanguage(language);
 
             return View();
         }
+
+        public IActionResult Course(int id, string language)
+        {
+            ViewBag.courseId = id;
+
+            //ViewBag.courseName = db.Courses.Find(id).Name;
+            //ViewBag.courseDiscraption = db.Courses.Find(id).Discraption;
+            //var videos = db.Videos.Where(x => x.CourseID == id).ToList();
+
+            return View(db);
+        }
+
 
 
 

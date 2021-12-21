@@ -14,7 +14,7 @@ namespace School_Project2021.Models
         public string Discraption { get; set; }
         public string Image { get; set; }
        // public List<Student> Students { get; set; }
-        public List<Student> Videos { get; set; }
+        public List<Video> Videos { get; set; }
 
     }
 }

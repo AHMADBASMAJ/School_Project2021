@@ -16,5 +16,7 @@ namespace School_Project2021.Models
         public int CourseID { get; set; }
         public Course Course { get; set; }
 
+        public List<Comment> Comments { get; set; }
+
     }
 }
