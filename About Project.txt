@@ -1,0 +1,3 @@
+# School_Project2021
+
+Free cours adlı bir web sitesi yapmak. Stinen amacı programlama ile ilgili vidyo şeklinde kurslar ekleme ve oğrenciye sunma. 
